@@ -37,3 +37,5 @@ npm-debug.log
 package-lock.json
 .idea/
 .env
+
+src/environments/*.ts
