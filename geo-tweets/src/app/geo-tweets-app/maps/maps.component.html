@@ -1,0 +1,18 @@
+<agm-map [latitude]='latitude' [longitude]='longitude'
+         [mapTypeId]='mapType' (mapClick)="addMarker($event.coords.lat, $event.coords.lng)">
+  <agm-marker
+    [latitude]="latitude" [longitude]="longitude" [label]="'M'"
+    (markerClick)="selectMarker($event)">
+  </agm-marker>
+  <agm-rectangle
+    [north]="max('latitude')"
+    [east]="max('longitude')"
+    [south]="min('latitude')"
+    [west]="min('longitude')"
+  >
+  </agm-rectangle>
+</agm-map>
+<p *ngIf="selectedMarker">
+  Lat: {{ selectedMarker.latitude }} Lng: {{ selectedMarker.longitude }}
+</p>
+
