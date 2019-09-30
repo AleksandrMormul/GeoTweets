@@ -4,7 +4,8 @@
 
 export const environment = {
   production: false
-   dbHost: 'YOUR MONGODB HOST'
+   dbHost: 'YOUR MONGODB HOST',
+   jwtKey: 'YOUR SECRET JWT KEY',
 };
 
 /*

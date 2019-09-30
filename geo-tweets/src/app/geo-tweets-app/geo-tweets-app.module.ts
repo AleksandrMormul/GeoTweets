@@ -21,7 +21,7 @@ import {environment} from '../../environments/environment';
   providers: [
     GoogleMapsAPIWrapper,
   ],
-   declarations: [
+  declarations: [
       GeoTweetsAppComponent,
       AdminComponent,
       MapsComponent

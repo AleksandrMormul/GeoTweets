@@ -1,11 +1,15 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import {GeoTweetsAppComponent} from './geo-tweets-app.component';
 import {MapsComponent} from './maps/maps.component';
+import {AdminComponent} from './admin/admin.component';
 
 
 const routes: Routes = [
-  { path: 'admin', component: MapsComponent }
+  { path: 'admin', component: AdminComponent },
+  {
+    path: 'admin/tweets',
+    component: MapsComponent,
+  }
 ];
 
 @NgModule({
