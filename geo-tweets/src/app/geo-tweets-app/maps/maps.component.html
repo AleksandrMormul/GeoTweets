@@ -1,18 +1,36 @@
-<agm-map [latitude]='latitude' [longitude]='longitude'
-         [mapTypeId]='mapType' (mapClick)="addMarker($event.coords.lat, $event.coords.lng)">
-  <agm-marker
-    [latitude]="latitude" [longitude]="longitude" [label]="'M'"
-    (markerClick)="selectMarker($event)">
-  </agm-marker>
-  <agm-rectangle
-    [north]="max('latitude')"
-    [east]="max('longitude')"
-    [south]="min('latitude')"
-    [west]="min('longitude')"
-  >
-  </agm-rectangle>
+<div class="admin-container">
+  <mat-form-field>
+    <input type="text"  id="tweet-text" matInput placeholder="Tweet text" #tweet>
+  </mat-form-field>
+  <mat-form-field>
+    <input type="number" id="admin-latitude" matInput placeholder="Latitude" >{{lat}}
+  </mat-form-field>
+  <mat-form-field>
+    <input type="number" id="admin-longitude" matInput placeholder="Longitude">{{lng}}
+  </mat-form-field>
+  <mat-form-field>
+    <input type="number" id="admin-radius" matInput placeholder="Radius" >{{radius}}
+  </mat-form-field>
+  <button mat-button (click)="postSettings(tweet.value)" >Submit</button>
+</div>
+
+<agm-map
+  [latitude]="lat"
+  [longitude]="lng"
+  [zoom]="zoom"
+  [disableDefaultUI]="false"
+  [zoomControl]="false">
+  <agm-circle
+    (radiusChange)="getRadius($event)"
+    (centerChange)="getCoords($event)"
+    [latitude]="lat"
+    [longitude]="lng"
+    [radius]="radius"
+    [fillColor]="'red'"
+    [circleDraggable]="true"
+    [editable]="true">
+  </agm-circle>
 </agm-map>
-<p *ngIf="selectedMarker">
-  Lat: {{ selectedMarker.latitude }} Lng: {{ selectedMarker.longitude }}
-</p>
+
+<ngx-tweet tweetId="921670221710032896"></ngx-tweet>
 

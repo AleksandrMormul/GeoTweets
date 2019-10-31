@@ -1,38 +1,56 @@
-import { Component, OnInit } from '@angular/core';
-import {AgmMarker, MarkerManager} from '@agm/core';
+import {Component, Input, OnInit, ViewChild} from '@angular/core';
+import { FormControl } from '@angular/forms';
+import {AgmCircle, MouseEvent} from '@agm/core';
+import {AgmMarker, CircleManager, MarkerManager} from '@agm/core';
+import {google} from '@agm/core/services/google-maps-types';
+import {Router} from '@angular/router';
+import {GeoTweetService} from '../geo-tweet.service';
+import {Twitter} from '../twitter/twitter';
 
 @Component({
   selector: 'app-maps',
   templateUrl: './maps.component.html',
   styleUrls: ['./maps.component.css']
 })
+
 export class MapsComponent implements OnInit {
-  latitude;
-  longitude;
-  selectedMarker;
-  mapType = 'roadmap';
-  markers = [];
-  constructor() { }
+
+  settingsTw: Twitter[] = [];
+  // tweetText = new FormControl('');
+  // google maps zoom level
+  zoom = 8;
+
+  // initial center position for the map
+  lat = 51.673858;
+  lng = 7.815982;
+  radius = 500;
+
+  constructor(
+    private service: GeoTweetService,
+  ) { }
 
   ngOnInit() {
   }
-
-  addMarker(latitude: number, longitude: number) {
-    this.markers.push({ latitude, longitude, alpha: 0.4 });
+  getRadius($event) {
+    this.radius = $event;
   }
 
-  max(coordType: 'latitude' | 'longitude'): number {
-    return Math.max(...this.markers.map(marker => marker[coordType]));
+  getCoords($event) {
+   this.lat = $event.lat;
+   this.lng = $event.lng;
   }
 
-  min(coordType: 'latitude' | 'longitude'): number {
-    return Math.min(...this.markers.map(marker => marker[coordType]));
+  postSettings(tweetText/*, lat, lng, radiusS*/): void {
+  const settings = {
+    tweet: tweetText,
+    latitude: this.lat,
+    longitude: this.lng,
+    radius: this.radius
+  };
+  this.service.addTweetSettings(settings as Twitter)
+      .subscribe(s => {
+      this.settingsTw.push(s);
+    });
   }
 
-  selectMarker(event) {
-    this.selectedMarker = {
-      latitude: event.latitude,
-      longitude: event.longitude
-    };
-  }
 }

@@ -5,7 +5,8 @@ import { GeoTweetsModule } from './modules/geo-tweets/geo-tweets.module';
 import { ConnectionDbModule } from './settings/connection-db/connection-db.module';
 import { UsersController } from './modules/users/users.controller';
 import { AuthModule } from './modules/auth/auth.module';
-import {UsersModule} from './modules/users/users.module';
+import { UsersModule } from './modules/users/users.module';
+import { TwitterModule } from './modules/twitter/twitter/twitter.module';
 
 export function getToken(): string {
   return localStorage.getItem('token');
@@ -17,6 +18,7 @@ export function getToken(): string {
     GeoTweetsModule,
     AuthModule,
     UsersModule,
+    TwitterModule,
   ],
   controllers: [AppController, UsersController],
   providers: [AppService],

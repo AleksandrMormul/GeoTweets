@@ -7,7 +7,9 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import {AuthGuardService} from './auth/auth-guard.service';
 import {JWT_OPTIONS, JwtHelperService, JwtModule} from '@auth0/angular-jwt';
-import {AuthService} from "./auth/auth.service";
+import { AuthService } from './auth/auth.service';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { ReactiveFormsModule } from '@angular/forms';
 
 export function getToken(): string {
   return localStorage.getItem('token');
@@ -20,12 +22,14 @@ export function getToken(): string {
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
+    ReactiveFormsModule,
     FormsModule,
     JwtModule.forRoot({
     config: {
       tokenGetter: getToken
     }
-  })
+  }),
+    BrowserAnimationsModule
   ],
   providers: [AuthGuardService, AuthService, AuthGuardService, JwtHelperService],
   bootstrap: [AppComponent]
