@@ -6,6 +6,7 @@ import {google} from '@agm/core/services/google-maps-types';
 import {Router} from '@angular/router';
 import {GeoTweetService} from '../geo-tweet.service';
 import {Twitter} from '../twitter/twitter';
+import {Tweets} from '../twitter/tweets';
 
 @Component({
   selector: 'app-maps',
@@ -16,6 +17,7 @@ import {Twitter} from '../twitter/twitter';
 export class MapsComponent implements OnInit {
 
   settingsTw: Twitter[] = [];
+  tweets: Tweets[] = [];
   // tweetText = new FormControl('');
   // google maps zoom level
   zoom = 8;
@@ -30,6 +32,7 @@ export class MapsComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+    this.getTweets();
   }
   getRadius($event) {
     this.radius = $event;
@@ -39,7 +42,12 @@ export class MapsComponent implements OnInit {
    this.lat = $event.lat;
    this.lng = $event.lng;
   }
-
+  getTweets(): void {
+    this.service.getTweets().subscribe(tweets => {
+      this.tweets = tweets;
+      return this.tweets;
+    });
+  }
   postSettings(tweetText/*, lat, lng, radiusS*/): void {
   const settings = {
     tweet: tweetText,

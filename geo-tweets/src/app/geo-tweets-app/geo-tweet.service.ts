@@ -24,4 +24,9 @@ export class GeoTweetService {
     const url = `${this.apiUrl}/api/twitter/create`;
     return this.http.post(url, settingsTweet);
   }
+
+  getTweets() {
+    const url = `${this.apiUrl}/api/twitter/tweets`;
+    return this.http.get(url);
+  }
 }
