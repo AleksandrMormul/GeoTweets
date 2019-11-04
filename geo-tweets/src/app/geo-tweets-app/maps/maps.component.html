@@ -1,17 +1,17 @@
 <div class="admin-container">
   <mat-form-field>
-    <input type="text"  id="tweet-text" matInput placeholder="Tweet text" #tweet>
+    <input type="text" id="tweet-text" matInput placeholder="Tweet text" #tweet>
   </mat-form-field>
   <mat-form-field>
-    <input type="number" id="admin-latitude" matInput placeholder="Latitude" >{{lat}}
+    <input type="number" id="admin-latitude" matInput placeholder="Latitude">{{lat}}
   </mat-form-field>
   <mat-form-field>
     <input type="number" id="admin-longitude" matInput placeholder="Longitude">{{lng}}
   </mat-form-field>
   <mat-form-field>
-    <input type="number" id="admin-radius" matInput placeholder="Radius" >{{radius}}
+    <input type="number" id="admin-radius" matInput placeholder="Radius">{{radius}}
   </mat-form-field>
-  <button mat-button (click)="postSettings(tweet.value)" >Submit</button>
+  <button mat-button (click)="postSettings(tweet.value)">Submit</button>
 </div>
 
 <agm-map
@@ -31,6 +31,12 @@
     [editable]="true">
   </agm-circle>
 </agm-map>
+<div class="container">
+  <div class="row" >
+    <div class="col" *ngFor="let tweet of tweets">
+      <ngx-tweet tweetId="{{tweet.tweetId}}"></ngx-tweet>
+    </div>
+  </div>
+</div>
 
-<ngx-tweet *ngFor="let tweet of tweets" tweetId="{{tweet.tweetId}}"></ngx-tweet>
 

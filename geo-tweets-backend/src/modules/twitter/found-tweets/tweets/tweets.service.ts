@@ -12,7 +12,7 @@ export class TweetsService {
 ) {}
 
     async getTweets(): Promise<Tweets[]> {
-        const tweets = await this.twitterModel.find().exec();
+        const tweets = await this.twitterModel.find().sort('-_id').exec();
         return tweets;
     }
 
