@@ -7,6 +7,7 @@ import { UsersController } from './modules/users/users.controller';
 import { AuthModule } from './modules/auth/auth.module';
 import { UsersModule } from './modules/users/users.module';
 import { TwitterModule } from './modules/twitter/twitter/twitter.module';
+import { ScheduleModule } from 'nest-schedule';
 
 export function getToken(): string {
   return localStorage.getItem('token');
@@ -19,6 +20,7 @@ export function getToken(): string {
     AuthModule,
     UsersModule,
     TwitterModule,
+    ScheduleModule.register(),
   ],
   controllers: [AppController, UsersController],
   providers: [AppService],

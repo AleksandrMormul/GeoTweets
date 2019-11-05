@@ -16,6 +16,14 @@ export class TweetsService {
         return tweets;
     }
 
+     async findTweets(id) {
+        const tweets = await this.twitterModel.find({tweetId: id});
+        if (tweets.length === 0) {
+            const newTweets = this.twitterModel({tweetId: id});
+            return newTweets.save();
+        }
+    }
+
     async addTweets(createTweetsDTO: TweetsDTO): Promise<Tweets> {
         const newTweets = await this.twitterModel(createTweetsDTO);
         return newTweets.save();
