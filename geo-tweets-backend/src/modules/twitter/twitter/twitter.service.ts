@@ -11,10 +11,10 @@ export class TwitterService {
         private readonly twitterModel: Model<Twitter>,
     ) {}
 
-    /*async getTweets(): Promise<Twitter[]> {
-        const tweets = await this.twitterModel.find().exec();
-        return tweets;
-    }*/
+    async getTwitterSettings() {
+        const tweet = await this.twitterModel.findOne().sort('-_id').exec();
+        return tweet;
+    }
 
     async addTweet(createTweetDTO: TwitterDTO): Promise<Twitter> {
         const newTweet = await this.twitterModel(createTweetDTO);
