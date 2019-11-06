@@ -1,0 +1,9 @@
+<button mat-button (click)="toAdmin()">Admin</button>
+
+<div class="container">
+  <div class="row" >
+    <div class="col" *ngFor="let tweet of tweets">
+      <ngx-tweet tweetId="{{tweet.tweetId}}"></ngx-tweet>
+    </div>
+  </div>
+</div>

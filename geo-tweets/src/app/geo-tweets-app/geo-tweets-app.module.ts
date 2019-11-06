@@ -13,6 +13,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
 import { NgxTweetModule } from 'ngx-tweet';
 import { AuthGuardService } from '../auth/auth-guard.service';
+import { HomepageComponent } from './homepage/homepage.component';
 
 @NgModule({
   imports: [
@@ -35,7 +36,8 @@ import { AuthGuardService } from '../auth/auth-guard.service';
       GeoTweetsAppComponent,
       AdminComponent,
       MapsComponent,
-      TwitterComponent
+      TwitterComponent,
+      HomepageComponent
    ]
 })
 export class GeoTweetsAppModule { }

@@ -5,10 +5,11 @@ import { AdminComponent } from './admin/admin.component';
 import { TwitterComponent } from './twitter/twitter.component';
 import { AuthGuardService } from '../auth/auth-guard.service';
 import { RoleGuardService } from '../guards/role-guard.service';
+import { HomepageComponent } from './homepage/homepage.component';
 
 
 const routes: Routes = [
-  /*{ path: '', component: TwitterComponent },*/
+  { path: '', component: HomepageComponent },
   { path: 'admin', component: AdminComponent,
   },
   {
