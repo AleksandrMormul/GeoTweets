@@ -26,7 +26,10 @@ export function getToken(): string {
     FormsModule,
     JwtModule.forRoot({
     config: {
-      tokenGetter: getToken
+      tokenGetter: function  tokenGetter() {
+        return     localStorage.getItem('access_token'); },
+      whitelistedDomains: ['localhost:3000'],
+      blacklistedRoutes: ['http://localhost:3000/api/authcontroller/login']
     }
   }),
     BrowserAnimationsModule

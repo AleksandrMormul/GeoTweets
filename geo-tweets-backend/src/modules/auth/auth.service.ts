@@ -8,24 +8,28 @@ import { JwtPayload } from './interfaces/jwt-payload.interface';
 export class AuthService {
 
     constructor(
-        private usersService: UsersService,
-        private jwtService: JwtService,
+        private readonly usersService: UsersService,
+        private readonly jwtService: JwtService,
     ) {}
+    private async validate(userData: LoginUserDto): Promise<LoginUserDto> {
+        return this.usersService.findOneByEmail(userData.login);
+    }
 
-    async validateUserByPassword(loginAttempt: LoginUserDto) {
-        const userToAttempt = await this.usersService.findOneByEmail(loginAttempt.login);
+    public async login(user: LoginUserDto): Promise< any | { status: number }>{
+        return this.validate(user).then((userData) => {
+            if (!userData) {
+                return { status: 404 };
+            }
+            const payload = `${userData.login}${userData._id}`;
+            const accessToken = this.jwtService.sign(payload);
 
-        return new Promise((resolve) => {
-            userToAttempt.checkPassword(loginAttempt.password, (err, isMatch) => {
-                if (err) {
-                    throw new UnauthorizedException();
-                }
-                if (isMatch) {
-                    resolve(this.createJwtPayload(userToAttempt));
-                } else {
-                    throw new UnauthorizedException();
-                }
-            });
+            return {
+                expires_in: 3600,
+                access_token: accessToken,
+                user_id: payload,
+                status: 200,
+            };
+
         });
     }
 

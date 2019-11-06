@@ -9,9 +9,10 @@ import { MapsComponent } from './maps/maps.component';
 import { AgmCoreModule, GoogleMapsAPIWrapper } from '@agm/core';
 import { environment } from '../../environments/environment';
 import { TwitterComponent } from './twitter/twitter.component';
-import {MatInputModule} from '@angular/material/input';
-import {MatSelectModule} from '@angular/material/select';
-import {NgxTweetModule} from "ngx-tweet";
+import { MatInputModule } from '@angular/material/input';
+import { MatSelectModule } from '@angular/material/select';
+import { NgxTweetModule } from 'ngx-tweet';
+import { AuthGuardService } from '../auth/auth-guard.service';
 
 @NgModule({
   imports: [
@@ -28,6 +29,7 @@ import {NgxTweetModule} from "ngx-tweet";
   ],
   providers: [
     GoogleMapsAPIWrapper,
+    [AuthGuardService],
   ],
   declarations: [
       GeoTweetsAppComponent,

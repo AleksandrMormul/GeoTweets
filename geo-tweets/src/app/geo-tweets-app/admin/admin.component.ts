@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { GeoTweetService } from '../geo-tweet.service';
 import { Router } from '@angular/router';
+import { AuthService } from '../../auth/auth.service';
 
 @Component({
   selector: 'app-admin',
@@ -14,7 +15,8 @@ export class AdminComponent implements OnInit {
 
   constructor(
     private service: GeoTweetService,
-    private router: Router
+    private router: Router,
+    private _authService: AuthService
   ) { }
 
   ngOnInit() {
@@ -26,7 +28,7 @@ export class AdminComponent implements OnInit {
       password: this.signInPassword
     };
     this.service.authAdmin(credentials).subscribe((res: any) => {
-      this.jwt = res.token;
+      localStorage.setItem('token', res.access_token);
       this.router.navigate(['admin/tweets']);
     });
 

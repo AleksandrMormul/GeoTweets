@@ -16,7 +16,7 @@ export class GeoTweetService {
   constructor(private http: ApiService) { }
 
   authAdmin(credentials) {
-    const url = `${this.apiUrl}/auth`;
+    const url = `${this.apiUrl}/api/authcontroller/login`;
     return this.http.post(url, credentials);
   }
 
